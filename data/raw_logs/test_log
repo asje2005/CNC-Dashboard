@@ -1,0 +1,3 @@
+program_name,cycle_time,operator_id,timestamp
+A123,45.2,OP01,2025-10-28 14:30
+B456,38.7,OP02,2025-10-28 15:00
