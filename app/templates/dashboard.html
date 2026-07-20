@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Caregiver Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='/css/styles.css') }}">
+</head>
+<body>
+  <header class="hero">
+    <nav>
+      <strong>Caregiver Dashboard</strong>
+      <span>MVP care coordination · July 15, 2026</span>
+    </nav>
+    <section>
+      <p class="eyebrow">Care operations</p>
+      <h1>See what each patient needs next.</h1>
+      <p>
+        A responsive dashboard for tracking patients, medications, tasks,
+        appointments, vitals, and notes across a shared care team.
+      </p>
+    </section>
+  </header>
+
+  <main>
+    <section class="stats" aria-label="Dashboard summary">
+      <article><span>{{ stats.patients }}</span><p>Patients</p></article>
+      <article><span>{{ stats.open_tasks }}</span><p>Open tasks</p></article>
+      <article><span>{{ stats.medications_due }}</span><p>Meds due soon</p></article>
+      <article><span>{{ stats.high_priority }}</span><p>High priority</p></article>
+      <article><span>{{ stats.appointments }}</span><p>Appointments</p></article>
+    </section>
+
+    <section class="grid two-column">
+      <div class="card">
+        <div class="card-header">
+          <h2>Patients</h2>
+          <small>Care roster</small>
+        </div>
+        <div class="patient-list">
+          {% for patient in patients %}
+          <article class="patient">
+            <div class="patient-heading">
+              <div>
+                <h3>{{ patient.first_name }} {{ patient.last_name }}</h3>
+                <p>{{ patient.primary_condition }}</p>
+              </div>
+              <span class="badge {{ patient.care_level|lower }}">{{ patient.care_level }}</span>
+            </div>
+            <dl>
+              <dt>DOB</dt><dd>{{ patient.date_of_birth }}</dd>
+              <dt>Phone</dt><dd>{{ patient.phone }}</dd>
+              <dt>Emergency</dt><dd>{{ patient.emergency_contact }}</dd>
+            </dl>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2>Tasks</h2>
+          <small>Prioritized worklist</small>
+        </div>
+        <ul class="timeline">
+          {% for task in tasks %}
+          <li>
+            <strong>{{ task.title }}</strong>
+            <span>{{ task.patient_name }} · {{ task.due_at }}</span>
+            <span>{{ task.caregiver_name or 'Unassigned' }} · {{ task.status }}</span>
+            <em class="priority {{ task.priority|lower }}">{{ task.priority }}</em>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+
+    <section class="grid three-column">
+      <div class="card">
+        <div class="card-header"><h2>Medications</h2></div>
+        {% for med in medications %}
+        <p class="row">
+          <b>{{ med.name }}</b>
+          <span>{{ med.patient_name }} · {{ med.dosage }} · {{ med.frequency }}</span>
+          <small>{{ med.next_due }} · {{ med.status }}</small>
+        </p>
+        {% endfor %}
+      </div>
+      <div class="card">
+        <div class="card-header"><h2>Appointments</h2></div>
+        {% for appt in appointments %}
+        <p class="row">
+          <b>{{ appt.title }}</b>
+          <span>{{ appt.patient_name }} · {{ appt.provider }}</span>
+          <small>{{ appt.starts_at }} · {{ appt.location }} · {{ appt.transportation }}</small>
+        </p>
+        {% endfor %}
+      </div>
+      <div class="card">
+        <div class="card-header"><h2>Vitals</h2></div>
+        {% for vital in vitals %}
+        <p class="row">
+          <b>{{ vital.patient_name }}</b>
+          <span>HR {{ vital.heart_rate }} · BP {{ vital.systolic }}/{{ vital.diastolic }}</span>
+          <small>Temp {{ vital.temperature }}°F · O₂ {{ vital.oxygen }}% · {{ vital.recorded_at }}</small>
+        </p>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="card notes">
+      <div class="card-header">
+        <h2>Recent Notes</h2>
+        <small>Shared care observations</small>
+      </div>
+      {% for note in notes %}
+      <article>
+        <h3>{{ note.category }} · {{ note.patient_name }}</h3>
+        <p>{{ note.body }}</p>
+        <small>{{ note.created_at }} by {{ note.caregiver_name or 'Unassigned' }}</small>
+      </article>
+      {% endfor %}
+    </section>
+  </main>
+</body>
+</html>
