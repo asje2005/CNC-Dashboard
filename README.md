@@ -11,6 +11,7 @@ A responsive FastAPI and SQLite application for coordinating in-home or clinic-b
 - **Health check** at `/health` for local runtime checks.
 - **Mobile-first frontend** built with Jinja templates and plain CSS.
 - **Regression tests** for rendering, API responses, health checks, and idempotent database seeding.
+- **React Native mobile starter** under `mobile/` with separate Android and iOS entry files for design exploration.
 
 ## Project Structure
 
@@ -23,6 +24,11 @@ app/
     dashboard.html        Responsive dashboard homepage
   static/
     css/styles.css        Frontend styling and responsive breakpoints
+mobile/
+  App.js                 Default Expo React Native entry point
+  App.android.jsx        Android React Native entry point
+  App.ios.jsx            iOS React Native entry point
+  src/                   Shared mobile screen, components, sample data, and theme tokens
 tests/
   test_app.py             Application and database regression tests
 scripts/
@@ -63,6 +69,17 @@ Open <http://127.0.0.1:8000> in a desktop or mobile browser. The database is cre
 - `GET /` renders the dashboard homepage.
 - `GET /api/summary` returns patients, tasks, medications, appointments, vitals, and notes as JSON.
 - `GET /health` returns `{ "status": "ok" }`.
+
+## Mobile Prototype
+
+The `mobile/` folder contains an Expo React Native starter app with `App.android.jsx` and `App.ios.jsx` entry files. Start there when you want to experiment with native mobile UI patterns separately from the working FastAPI dashboard. See `mobile/README.md` for setup notes.
+
+```bash
+cd mobile
+npm install
+npm run android
+npm run ios
+```
 
 ## Testing
 

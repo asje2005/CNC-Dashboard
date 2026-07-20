@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "Caregiver Dashboard",
+    "slug": "caregiver-dashboard-mobile",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.example.caregiverdashboard"
+    },
+    "android": {
+      "package": "com.example.caregiverdashboard",
+      "adaptiveIcon": {
+        "backgroundColor": "#2563eb"
+      }
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
