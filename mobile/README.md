@@ -31,6 +31,8 @@ npm run ios
 
 You can also run `npm run web` to preview the React Native layout in a browser while iterating on design. The Android and iOS entry files currently share the same dashboard screen but pass a platform label, making it easy to split behavior or styling later.
 
+If you are on Windows and just want to review the sample files, double-click `..\open_mobile_files.bat` from the project root. The batch file opens this folder and the main mobile prototype files in VS Code.
+
 ## Design exploration ideas
 
 - Update `src/theme/tokens.js` to try different colors, spacing, and brand directions.

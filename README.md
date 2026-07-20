@@ -81,6 +81,8 @@ npm run android
 npm run ios
 ```
 
+On Windows, double-click `open_mobile_files.bat` from the project root to open the mobile prototype files in VS Code for review.
+
 ## Testing
 
 ```bash
